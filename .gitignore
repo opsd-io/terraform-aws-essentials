@@ -24,3 +24,7 @@
 **/.CFUserTextEncoding
 **/.Trash/
 **/$RECYCLE.BIN/
+
+## direnv
+/.envrc.private
+/.direnv/
