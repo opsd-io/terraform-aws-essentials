@@ -34,3 +34,9 @@ output "backend_bucket" {
   sensitive   = false
   value       = aws_s3_bucket.state.bucket
 }
+
+output "dynamodb_table" {
+  description = "The name of DynamoDB Table to use for state locking and consistency."
+  sensitive   = false
+  value       = aws_dynamodb_table.state.name
+}

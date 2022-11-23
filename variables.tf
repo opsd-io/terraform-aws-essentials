@@ -39,3 +39,10 @@ variable "bucket_tags" {
   type        = map(string)
   default     = {}
 }
+
+
+variable "dynamodb_table" {
+  description = "The name of DynamoDB Table to use for state locking and consistency."
+  type        = string
+  default     = "terraform-state-locks"
+}
