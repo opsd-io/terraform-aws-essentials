@@ -8,6 +8,8 @@ terraform {
   }
 }
 
+data "aws_region" "current" {}
+
 ## Terraform IAM user for programmatic access.
 
 resource "aws_iam_user" "terraform" {

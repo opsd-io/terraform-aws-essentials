@@ -21,3 +21,16 @@ output "user_secret_key" {
   sensitive   = true
   value       = aws_iam_access_key.terraform.secret
 }
+
+
+output "backend_region" {
+  description = "The region of the S3 Bucket and DynamoDB Table for state storage."
+  sensitive   = false
+  value       = data.aws_region.current.name
+}
+
+output "backend_bucket" {
+  description = "The name of the S3 Bucket to use for state storage."
+  sensitive   = false
+  value       = aws_s3_bucket.state.bucket
+}

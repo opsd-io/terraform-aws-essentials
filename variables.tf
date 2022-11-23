@@ -27,3 +27,15 @@ variable "inline_policies" {
   type        = map(string)
   default     = {}
 }
+
+
+variable "bucket_name" {
+  description = "The name of the S3 Bucket to use for state storage."
+  type        = string
+}
+
+variable "bucket_tags" {
+  description = "A map of tags to assign to the bucket."
+  type        = map(string)
+  default     = {}
+}
