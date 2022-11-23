@@ -1,12 +1,29 @@
-# variable "variable_name" {
-#	  description = "variable description"
-#   type        = number
-#   default     = 1
-# }
+variable "user_name" {
+  description = "The name of the Terraform IAM user."
+  type        = string
+  default     = "terraform"
+}
 
-# variable "variable_password" {
-#	  description = "variable description"
-#   type        = string
-#   sensitive   = true
-#   default     = "abc"
-# }
+variable "user_path" {
+  description = "The path for the Terraform IAM user."
+  type        = string
+  default     = "/"
+}
+
+variable "user_tags" {
+  description = "A map of tags assigned to the Terraform IAM user."
+  type        = map(string)
+  default     = {}
+}
+
+variable "attached_policies" {
+  description = "Additional attached policies' ARNs for Terraform user."
+  type        = map(string)
+  default     = {}
+}
+
+variable "inline_policies" {
+  description = "Additional inline policies for Terraform user."
+  type        = map(string)
+  default     = {}
+}

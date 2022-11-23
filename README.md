@@ -29,10 +29,13 @@ module "module_name" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.20.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.20.0 |
 
 ## Modules
 
@@ -40,15 +43,31 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_iam_access_key.terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
+| [aws_iam_user.terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
+| [aws_iam_user_policy.additional](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
+| [aws_iam_user_policy_attachment.additional](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_attached_policies"></a> [attached\_policies](#input\_attached\_policies) | Additional attached policies' ARNs for Terraform user. | `map(string)` | `{}` | no |
+| <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | Additional inline policies for Terraform user. | `map(string)` | `{}` | no |
+| <a name="input_user_name"></a> [user\_name](#input\_user\_name) | The name of the Terraform IAM user. | `string` | `"terraform"` | no |
+| <a name="input_user_path"></a> [user\_path](#input\_user\_path) | The path for the Terraform IAM user. | `string` | `"/"` | no |
+| <a name="input_user_tags"></a> [user\_tags](#input\_user\_tags) | A map of tags assigned to the Terraform IAM user. | `map(string)` | `{}` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_user_access_key"></a> [user\_access\_key](#output\_user\_access\_key) | The AWS\_ACCESS\_KEY\_ID. |
+| <a name="output_user_arn"></a> [user\_arn](#output\_user\_arn) | The ARN of the Terraform IAM user. |
+| <a name="output_user_name"></a> [user\_name](#output\_user\_name) | The name of the Terraform IAM user. |
+| <a name="output_user_secret_key"></a> [user\_secret\_key](#output\_user\_secret\_key) | The AWS\_SECRET\_ACCESS\_KEY. |
 <!-- END_TF_DOCS -->
 
 ## Examples of usage
