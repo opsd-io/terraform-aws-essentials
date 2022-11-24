@@ -35,3 +35,18 @@ resource "aws_iam_user_policy" "additional" {
   name     = each.key
   policy   = each.value
 }
+
+# For internal access policies we're using inline policies to maintain  a strict one-to-one
+# relationship between a policy and the identity (rather than reusable managed policies).
+
+resource "aws_iam_user_policy" "s3bucket" {
+  name   = "terraform-backend-s3bucket"
+  user   = aws_iam_user.terraform.name
+  policy = data.aws_iam_policy_document.s3bucket.json
+}
+
+resource "aws_iam_user_policy" "dynamodb" {
+  name   = "terraform-backend-dynamodb"
+  user   = aws_iam_user.terraform.name
+  policy = data.aws_iam_policy_document.dynamodb.json
+}

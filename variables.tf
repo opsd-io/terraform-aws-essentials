@@ -41,8 +41,20 @@ variable "bucket_tags" {
 }
 
 
-variable "dynamodb_table" {
+variable "dynamodb_table_name" {
   description = "The name of DynamoDB Table to use for state locking and consistency."
   type        = string
   default     = "terraform-state-locks"
+}
+
+variable "dynamodb_table_tags" {
+  description = "A map of tags to assign to the table."
+  type        = map(string)
+  default     = {}
+}
+
+variable "create_managed_policies" {
+  description = "If set to true, creates managed policies to grant "
+  type        = bool
+  default     = false
 }
