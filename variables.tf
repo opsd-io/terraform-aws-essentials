@@ -28,6 +28,16 @@ variable "inline_policies" {
   default     = {}
 }
 
+variable "assume_role_arns" {
+  description = <<-EOF
+    A set of IAM roles that Terraform IAM user will be able to assume.
+    These roles are for accounts management and should have the AdministratorAccess policy attached.
+    By default, all `terraform` roles are allowed from every account, as far as role's assume policy allows.
+  EOF
+  type        = set(string)
+  default     = ["arn:aws:iam::*:role/terraform"]
+}
+
 
 variable "bucket_name" {
   description = "The name of the S3 Bucket to use for state storage."

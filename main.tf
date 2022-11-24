@@ -50,3 +50,21 @@ resource "aws_iam_user_policy" "dynamodb" {
   user   = aws_iam_user.terraform.name
   policy = data.aws_iam_policy_document.dynamodb.json
 }
+
+# Skip if var.assume_role_arns is empty. Otherwise it would allow ANY role!
+resource "aws_iam_user_policy" "assume_role" {
+  count  = min(length(var.assume_role_arns), 1)
+  name   = "terraform-assume-role"
+  user   = aws_iam_user.terraform.name
+  policy = data.aws_iam_policy_document.assume_role.json
+}
+
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "sts:AssumeRole",
+    ]
+    resources = var.assume_role_arns
+  }
+}
