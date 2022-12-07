@@ -36,7 +36,7 @@ resource "aws_iam_user_policy" "additional" {
   policy   = each.value
 }
 
-# For internal access policies we're using inline policies to maintain  a strict one-to-one
+# For internal access policies we're using inline policies to maintain a strict one-to-one
 # relationship between a policy and the identity (rather than reusable managed policies).
 
 resource "aws_iam_user_policy" "s3bucket" {
