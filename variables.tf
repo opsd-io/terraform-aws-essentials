@@ -44,6 +44,12 @@ variable "bucket_name" {
   type        = string
 }
 
+variable "bucket_server_side_encryption" {
+  description = "If true, enables S3 bucket server-side encryption."
+  type        = bool
+  default     = true
+}
+
 variable "bucket_tags" {
   description = "A map of tags to assign to the bucket."
   type        = map(string)

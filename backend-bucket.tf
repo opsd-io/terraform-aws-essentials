@@ -25,6 +25,32 @@ resource "aws_s3_bucket_versioning" "state" {
   }
 }
 
+## S3 Bucket encryption.
+
+resource "aws_kms_key" "state" {
+  count                   = var.bucket_server_side_encryption ? 1 : 0
+  description             = "Terraform state encryption key - ${var.bucket_name} bucket."
+  deletion_window_in_days = 14
+}
+
+resource "aws_kms_alias" "state" {
+  count         = var.bucket_server_side_encryption ? 1 : 0
+  name          = "alias/${var.bucket_name}"
+  target_key_id = aws_kms_key.state[0].key_id
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "state" {
+  count  = var.bucket_server_side_encryption ? 1 : 0
+  bucket = aws_s3_bucket.state.bucket
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.state[0].arn
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
+
+## Access policy.
 
 data "aws_iam_policy_document" "s3bucket" {
   statement {
@@ -42,6 +68,19 @@ data "aws_iam_policy_document" "s3bucket" {
       "s3:DeleteObject",
     ]
     resources = ["${aws_s3_bucket.state.arn}/*.tfstate"]
+  }
+  dynamic "statement" {
+    # Only if bucket_server_side_encryption=true we need access to KMS.
+    for_each = var.bucket_server_side_encryption ? [0] : []
+    content {
+      effect = "Allow"
+      actions = [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+      ]
+      resources = [aws_kms_key.state[0].arn]
+    }
   }
 }
 
