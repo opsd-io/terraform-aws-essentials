@@ -2,7 +2,7 @@
 
 Meet **OPSd**. The unique and effortless way of managing cloud infrastructure.
 
-# terraform-module-template
+# terraform-aws-essentials
 
 ## Introduction
 
@@ -55,9 +55,12 @@ No modules.
 | [aws_iam_user_policy.dynamodb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
 | [aws_iam_user_policy.s3bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
 | [aws_iam_user_policy_attachment.additional](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
+| [aws_kms_alias.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
+| [aws_kms_key.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_s3_bucket.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_acl.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
 | [aws_s3_bucket_public_access_block.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_s3_bucket_versioning.state](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.dynamodb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -71,6 +74,7 @@ No modules.
 | <a name="input_assume_role_arns"></a> [assume\_role\_arns](#input\_assume\_role\_arns) | A set of IAM roles that Terraform IAM user will be able to assume.<br>These roles are for accounts management and should have the AdministratorAccess policy attached.<br>By default, all `terraform` roles are allowed from every account, as far as role's assume policy allows. | `set(string)` | <pre>[<br>  "arn:aws:iam::*:role/terraform"<br>]</pre> | no |
 | <a name="input_attached_policies"></a> [attached\_policies](#input\_attached\_policies) | Additional attached policies' ARNs for Terraform user. | `map(string)` | `{}` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the S3 Bucket to use for state storage. | `string` | n/a | yes |
+| <a name="input_bucket_server_side_encryption"></a> [bucket\_server\_side\_encryption](#input\_bucket\_server\_side\_encryption) | If true, enables S3 bucket server-side encryption. | `bool` | `true` | no |
 | <a name="input_bucket_tags"></a> [bucket\_tags](#input\_bucket\_tags) | A map of tags to assign to the bucket. | `map(string)` | `{}` | no |
 | <a name="input_create_managed_policies"></a> [create\_managed\_policies](#input\_create\_managed\_policies) | If set to true, creates managed policies to grant | `bool` | `false` | no |
 | <a name="input_dynamodb_table_name"></a> [dynamodb\_table\_name](#input\_dynamodb\_table\_name) | The name of DynamoDB Table to use for state locking and consistency. | `string` | `"terraform-state-locks"` | no |
